@@ -1,0 +1,31 @@
+MODELO LÓGICO
+
+cliente (cpf, nome)
+agencia (id, permite_emprestimo, horario_abertura, horario_fechamento)
+conta (id, limite, dono, agencia)
+	agencia referencia agencia (id)
+	dono referencia cliente (cpf)
+transacao (id, valor, _data, tipo, conta_origem, conta_destino)
+	conta_origem referencia conta (id)
+	conta_destino referencia conta (id)
+negativacao (inicio, fim, cliente)
+	cliente referencia cliente (cpf)
+
+
+REGRAS DE INTEGRIDADE
+
+- A conta de número 0000 é do próprio banco, dela saem os empréstimos. Esta conta é de uma agência 0000, que só possui esta conta e não permite empréstimos.
+
+Não pode ter empréstimos para pessoas negativadas ou em agências que não permitem 
+empréstimos ou empréstimos além de seu crédito emprestado acumulado.
+
+O número de CPF da pessoa tem que ter mesma paridade que a hora de abertura
+da agência de sua conta, ou seja, se a hora é ímpar, o cpf também deve ser.
+
+Cliente só pode sacar no máximo o que ele tem disponível em sua conta, se for maior,
+ele vai realizar um saque e um empréstimo, se o empréstimo for recusado, não será realizado
+saque também.
+
+Transações só são válidas dentro do horário de funcionamento da agência. Depósitos devem ser
+de origem nula, saques devem ter destino nulo, transferencias e emprestimos não podem ter origem
+nem destino nulos.

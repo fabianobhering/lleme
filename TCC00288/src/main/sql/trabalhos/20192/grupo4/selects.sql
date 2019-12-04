@@ -1,0 +1,5 @@
+-- SELECT * FROM agencia;
+-- SELECT * FROM cliente;
+-- SELECT * FROM conta;
+-- SELECT * FROM transacao;
+-- SELECT * FROM negativacao;
