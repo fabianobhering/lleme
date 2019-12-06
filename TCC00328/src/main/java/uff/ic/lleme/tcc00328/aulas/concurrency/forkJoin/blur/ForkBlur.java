@@ -1,4 +1,4 @@
-package uff.ic.lleme.tcc00328.aulas.concurrency.executor.forkJoin.blur;
+package uff.ic.lleme.tcc00328.aulas.concurrency.forkJoin.blur;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -7,12 +7,13 @@ import java.util.concurrent.RecursiveAction;
 import javax.imageio.ImageIO;
 
 /**
- * ForkBlur implements a simple horizontal image blur. It averages pixels in the source array and
- * writes them to a destination array. The sThreshold value determines whether the blurring will be
- * performed directly or split into two tasks.
+ * ForkBlur implements a simple horizontal image blur. It averages pixels in the
+ * source array and writes them to a destination array. The sThreshold value
+ * determines whether the blurring will be performed directly or split into two
+ * tasks.
  *
- * This is not the recommended way to blur images; it is only intended to illustrate the use of the
- * Fork/Join framework.
+ * This is not the recommended way to blur images; it is only intended to
+ * illustrate the use of the Fork/Join framework.
  */
 public class ForkBlur extends RecursiveAction {
 
@@ -44,9 +45,9 @@ public class ForkBlur extends RecursiveAction {
             }
             // Re-assemble destination pixel.
             int dpixel = (0xff000000)
-                | (((int) rt) << 16)
-                | (((int) gt) << 8)
-                | (((int) bt) << 0);
+                    | (((int) rt) << 16)
+                    | (((int) gt) << 8)
+                    | (((int) bt) << 0);
             mDestination[index] = dpixel;
         }
     }
@@ -60,8 +61,8 @@ public class ForkBlur extends RecursiveAction {
         }
         int split = mLength / 2;
         invokeAll(new ForkBlur(mSource, mStart, split, mDestination),
-            new ForkBlur(mSource, mStart + split, mLength - split,
-                mDestination));
+                new ForkBlur(mSource, mStart + split, mLength - split,
+                        mDestination));
     }
 
     // Plumbing follows.
@@ -86,17 +87,17 @@ public class ForkBlur extends RecursiveAction {
         System.out.println("Threshold is " + sThreshold);
         int processors = Runtime.getRuntime().availableProcessors();
         System.out.println(Integer.toString(processors) + " processor"
-            + (processors != 1 ? "s are " : " is ")
-            + "available");
+                + (processors != 1 ? "s are " : " is ")
+                + "available");
         ForkBlur fb = new ForkBlur(src, 0, src.length, dst);
         ForkJoinPool pool = new ForkJoinPool();
         long startTime = System.currentTimeMillis();
         pool.invoke(fb);
         long endTime = System.currentTimeMillis();
         System.out.println("Image blur took " + (endTime - startTime)
-            + " milliseconds.");
+                + " milliseconds.");
         BufferedImage dstImage
-            = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+                = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         dstImage.setRGB(0, 0, w, h, dst, 0, w);
         return dstImage;
     }

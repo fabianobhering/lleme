@@ -1,4 +1,4 @@
-package uff.ic.lleme.tcc00328.aulas.concurrency.executor.forkJoin.matriz;
+package uff.ic.lleme.tcc00328.aulas.concurrency.forkJoin.matriz;
 
 import java.util.*;
 import java.util.concurrent.*;

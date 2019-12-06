@@ -1,4 +1,4 @@
-package uff.ic.lleme.tcc00328.aulas.concurrency.executor.callable;
+package uff.ic.lleme.tcc00328.aulas.concurrency.callable;
 
 import java.util.concurrent.Callable;
 

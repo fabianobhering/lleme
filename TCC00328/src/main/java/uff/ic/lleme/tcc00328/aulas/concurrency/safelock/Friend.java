@@ -1,17 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package uff.ic.lleme.tcc00328.aulas.concurrency.safelock;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-/**
- *
- * @author lapaesleme
- */
 class Friend {
 
     private final String name;
@@ -33,8 +24,10 @@ class Friend {
             yourLock = bower.lock.tryLock();
         } finally {
             if (!(myLock && yourLock)) {
-                if (myLock) lock.unlock();
-                if (yourLock) bower.lock.unlock();
+                if (myLock)
+                    lock.unlock();
+                if (yourLock)
+                    bower.lock.unlock();
             }
         }
         return myLock && yourLock;
@@ -43,13 +36,12 @@ class Friend {
     public void bow(Friend bower) {
         if (impendingBow(bower))
             try {
-                System.out.format("%s: %s has bowed to me!%n", this.name, bower.getName());
-                bower.bowBack(this);
-            } finally {
-                lock.unlock();
-                bower.lock.unlock();
-            }
-        else
+            System.out.format("%s: %s has bowed to me!%n", this.name, bower.getName());
+            bower.bowBack(this);
+        } finally {
+            lock.unlock();
+            bower.lock.unlock();
+        } else
             System.out.format("%s: %s started to bow to me, but saw that I was already bowing to him.%n", this.name, bower.getName());
     }
 

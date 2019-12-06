@@ -1,4 +1,4 @@
-package uff.ic.lleme.tcc00328.aulas.concurrency.executor.callable;
+package uff.ic.lleme.tcc00328.aulas.concurrency.callable;
 
 import java.util.concurrent.CompletionService;
 import java.util.concurrent.ExecutionException;
@@ -28,12 +28,12 @@ public class MainCallable {
         {
             while (recebidos < enviados && !errors)
                 try {
-                    Aluno aluno = gerenciador.take().get();
-                    System.out.println(aluno.nome + ": " + aluno.situacao);
-                    recebidos++;
-                } catch (Exception e) {
-                    errors = true;
-                }
+                Aluno aluno = gerenciador.take().get();
+                System.out.println(aluno.nome + ": " + aluno.situacao);
+                recebidos++;
+            } catch (Exception e) {
+                errors = true;
+            }
         }
     }
 }

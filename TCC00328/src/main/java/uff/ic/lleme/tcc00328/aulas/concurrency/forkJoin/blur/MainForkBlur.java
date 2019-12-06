@@ -1,6 +1,5 @@
-package uff.ic.lleme.tcc00328.aulas.concurrency.executor.forkJoin.blur;
+package uff.ic.lleme.tcc00328.aulas.concurrency.forkJoin.blur;
 
-import uff.ic.lleme.tcc00328.aulas.concurrency.executor.forkJoin.blur.ForkBlur;
 import java.util.concurrent.ForkJoinPool;
 
 public class MainForkBlur {
